@@ -5,19 +5,6 @@
 
 using namespace Rcpp;
 
-namespace Rcpp {
-template<> tiny_utf8::string Rcpp::as<tiny_utf8::string>(SEXP);
-}
-
-namespace Rcpp {
-template<> tiny_utf8::string as<tiny_utf8::string>(SEXP x){
-  if(TYPEOF(x) != STRSXP || Rf_xlength(x) > 1)
-    Rcpp::stop("Unable to convert SEXP of type %s to utf8str", Rf_type2char(TYPEOF(x)));
-  tiny_utf8::string xx(Rcpp::as<const char*>(x));
-  return xx;
-}
-}
-
 // [[Rcpp::export]]
 Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim_ = R_NilValue){
   int vec1Size=vec1.size();
@@ -204,21 +191,12 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
   return res;
 }
 
-// make alignment-normalization optional (done)
-// arma-(rcppparallel?)-dist_mat (done)
-// cell 100->inf (done)
-// vc_leven check for NA (if(na)return(na)at d(lenStr1, lenStr2) in bilbao, bc vectorization. handle in res(i) assignment) / NULL (stop and return NULL/NA, or return length of other string?) (return NA/NULL?) (done)
-// vc_leven must take arguments when used in distmat? (done. solved with pointer functions)
-// Major bug: alignment normalization cannot be the sum of both in and dels (e.g. "hite" and "hiet". solution: add max(in, del)? (done)
-// distmat keep original col and row names (done)
-// vc_leven progress bar (done)
-// (also change alignment-normalization in alignment? and leven-based functions)
-// bilbao part add alignment-normalization (if-else->bilbao/arr1+arr2/length (order correct?). but which length?) (same as above)?
-// check for NA effects (done)
-// vanilla leven (copy vc_leven: only need to remove checkvowelconsonant())
+// RcppParallel
+// documentation (oxygen, README)
+// term paper
+// vc_align allow multiple response
 // pmi (try: "-" as basis of indel costs, and feed into weighted edit distance (since there are no "-"s in the original dataset))
 // mds_map and all to geom based?
-// dist -> 1. na.rm 2. custom function (put in pointer wrapper) 3. generic function (put-off) 4. delim, align-norm (done)
+// dist -> generic function
 // ref-point-map
 // beam map?
-// parallel computing

@@ -2,7 +2,6 @@
 
 using namespace Rcpp;
 
-// [[Rcpp::export]]
 bool checkVowelConsonant(int w1, int w2){
   bool res = false;
   IntegerVector vowel = {105, 121, 616, 649, 623, 117, 618, 655, 650, 101, 248, 600, 629, 612, 111, 601, 603, 339, 604, 606, 652, 596, 592, 230, 97, 630, 593, 594, 650};

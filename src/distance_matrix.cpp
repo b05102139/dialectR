@@ -2,18 +2,18 @@
 #include "df2Mat.h"
 #include "checkVowelConsonant.h"
 #include "vc_leven.h"
-//#include "leven.h"
+#include "leven.h"
 using namespace Rcpp;
 
 typedef Rcpp::NumericVector (*funcPtr)(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization, Rcpp::Nullable<std::string> delim_);
 
 XPtr<funcPtr> putFunPtrInXPtr(std::string fstr) {
-  if (fstr == "vc_leven")
+  if (fstr == "leven")
+    return(XPtr<funcPtr>(new funcPtr(&leven)));
+  else if (fstr == "vc_leven")
     return(XPtr<funcPtr>(new funcPtr(&vc_leven)));
-//  else if (fstr == "vc_leven")
-//    return(XPtr<funcPtr>(new funcPtr(&vc_leven)));
   else
-    return XPtr<funcPtr>(R_NilValue); // runtime error as NULL no XPtr
+    return XPtr<funcPtr>(R_NilValue);
 }
 
 // [[Rcpp::depends(RcppProgress)]]
