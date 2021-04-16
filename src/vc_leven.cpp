@@ -5,8 +5,20 @@
 
 using namespace Rcpp;
 
+//' VC-sensitive edit distance for Dialectometry
+//'
+//' An edit distance that is sensitive to vowel and consonant alignment. If the aligned segments are a vowel-consonant pair, the difference is penalized as a score of 2; if not, 1.  Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance.
+//'
+//' @param vec1 A vector of words.
+//' @param vec2 A vector of words to be compared against.
+//' @param alignment_normalization A logical value, indicating whether or not the difference scores are to be normalized by alignment length.
+//' @param delim An optional delimiter, in situations where multiple responses exist in the data.
+//' @return
+//' @export
+//'
+//' @examples
 // [[Rcpp::export]]
-Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim_ = R_NilValue){
+Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim = R_NilValue){
   int vec1Size=vec1.size();
   int vec2Size=vec2.size();
   if(vec1Size!=vec2Size) Rcpp::stop("The two vector inputs are not of same length.");
@@ -20,7 +32,7 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
   int inCounter;
   int delCounter;
   NumericMatrix d;
-  if(delim_.isNull()){
+  if(delim.isNull()){
     for(int i=0;i<vec1Size;i++){
       inCounter=0;
       delCounter=0;
@@ -93,8 +105,8 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
         }
       }
     }
-  } else if(delim_.isNotNull()){
-    std::string delim = String(delim_);
+  } else if(delim.isNotNull()){
+    std::string delim_ = String(delim);
     NumericMatrix bilbaoMatrix;
     int arr1Size;
     int arr2Size;
@@ -102,8 +114,8 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
     for(int k=0;k<vec1Size;k++){
       str1=tiny_utf8::string(as<std::string>(vec1(k)));
       str2=tiny_utf8::string(as<std::string>(vec2(k)));
-      StringVector arr1=split(str1.c_str(), delim);
-      StringVector arr2=split(str2.c_str(), delim);
+      StringVector arr1=split(str1.c_str(), delim_);
+      StringVector arr2=split(str2.c_str(), delim_);
       arr1Size=arr1.size();
       arr2Size=arr2.size();
       NumericMatrix bilbaoMatrix(arr1Size, arr2Size);
@@ -191,6 +203,7 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
   return res;
 }
 
+// df2align handle NA
 // RcppParallel
 // documentation (oxygen, README)
 // term paper

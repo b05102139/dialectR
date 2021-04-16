@@ -5,92 +5,53 @@
 
 using namespace Rcpp;
 
-// checkVowelConsonant
-bool checkVowelConsonant(int w1, int w2);
-RcppExport SEXP _dialectR_checkVowelConsonant(SEXP w1SEXP, SEXP w2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type w1(w1SEXP);
-    Rcpp::traits::input_parameter< int >::type w2(w2SEXP);
-    rcpp_result_gen = Rcpp::wrap(checkVowelConsonant(w1, w2));
-    return rcpp_result_gen;
-END_RCPP
-}
 // distance_matrix
-Rcpp::NumericMatrix distance_matrix(Rcpp::DataFrame dialect_data, std::string funname, bool alignment_normalization, Rcpp::Nullable<std::string> delim_);
-RcppExport SEXP _dialectR_distance_matrix(SEXP dialect_dataSEXP, SEXP funnameSEXP, SEXP alignment_normalizationSEXP, SEXP delim_SEXP) {
+Rcpp::NumericMatrix distance_matrix(Rcpp::DataFrame dialect_data, std::string funname, bool alignment_normalization, Rcpp::Nullable<std::string> delim);
+RcppExport SEXP _dialectR_distance_matrix(SEXP dialect_dataSEXP, SEXP funnameSEXP, SEXP alignment_normalizationSEXP, SEXP delimSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::DataFrame >::type dialect_data(dialect_dataSEXP);
     Rcpp::traits::input_parameter< std::string >::type funname(funnameSEXP);
     Rcpp::traits::input_parameter< bool >::type alignment_normalization(alignment_normalizationSEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type delim_(delim_SEXP);
-    rcpp_result_gen = Rcpp::wrap(distance_matrix(dialect_data, funname, alignment_normalization, delim_));
+    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type delim(delimSEXP);
+    rcpp_result_gen = Rcpp::wrap(distance_matrix(dialect_data, funname, alignment_normalization, delim));
     return rcpp_result_gen;
 END_RCPP
 }
 // leven
-Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization, Rcpp::Nullable<std::string> delim_);
-RcppExport SEXP _dialectR_leven(SEXP vec1SEXP, SEXP vec2SEXP, SEXP alignment_normalizationSEXP, SEXP delim_SEXP) {
+Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization, Rcpp::Nullable<std::string> delim);
+RcppExport SEXP _dialectR_leven(SEXP vec1SEXP, SEXP vec2SEXP, SEXP alignment_normalizationSEXP, SEXP delimSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::StringVector >::type vec1(vec1SEXP);
     Rcpp::traits::input_parameter< Rcpp::StringVector >::type vec2(vec2SEXP);
     Rcpp::traits::input_parameter< bool >::type alignment_normalization(alignment_normalizationSEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type delim_(delim_SEXP);
-    rcpp_result_gen = Rcpp::wrap(leven(vec1, vec2, alignment_normalization, delim_));
-    return rcpp_result_gen;
-END_RCPP
-}
-// split
-StringVector split(std::string s, std::string delimiter);
-RcppExport SEXP _dialectR_split(SEXP sSEXP, SEXP delimiterSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string >::type s(sSEXP);
-    Rcpp::traits::input_parameter< std::string >::type delimiter(delimiterSEXP);
-    rcpp_result_gen = Rcpp::wrap(split(s, delimiter));
+    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type delim(delimSEXP);
+    rcpp_result_gen = Rcpp::wrap(leven(vec1, vec2, alignment_normalization, delim));
     return rcpp_result_gen;
 END_RCPP
 }
 // vc_leven
-Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization, Rcpp::Nullable<std::string> delim_);
-RcppExport SEXP _dialectR_vc_leven(SEXP vec1SEXP, SEXP vec2SEXP, SEXP alignment_normalizationSEXP, SEXP delim_SEXP) {
+Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization, Rcpp::Nullable<std::string> delim);
+RcppExport SEXP _dialectR_vc_leven(SEXP vec1SEXP, SEXP vec2SEXP, SEXP alignment_normalizationSEXP, SEXP delimSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::StringVector >::type vec1(vec1SEXP);
     Rcpp::traits::input_parameter< Rcpp::StringVector >::type vec2(vec2SEXP);
     Rcpp::traits::input_parameter< bool >::type alignment_normalization(alignment_normalizationSEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type delim_(delim_SEXP);
-    rcpp_result_gen = Rcpp::wrap(vc_leven(vec1, vec2, alignment_normalization, delim_));
-    return rcpp_result_gen;
-END_RCPP
-}
-// vc_leven_align
-Rcpp::List vc_leven_align(Rcpp::StringVector vec1, Rcpp::StringVector vec2);
-RcppExport SEXP _dialectR_vc_leven_align(SEXP vec1SEXP, SEXP vec2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::StringVector >::type vec1(vec1SEXP);
-    Rcpp::traits::input_parameter< Rcpp::StringVector >::type vec2(vec2SEXP);
-    rcpp_result_gen = Rcpp::wrap(vc_leven_align(vec1, vec2));
+    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type delim(delimSEXP);
+    rcpp_result_gen = Rcpp::wrap(vc_leven(vec1, vec2, alignment_normalization, delim));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_dialectR_checkVowelConsonant", (DL_FUNC) &_dialectR_checkVowelConsonant, 2},
     {"_dialectR_distance_matrix", (DL_FUNC) &_dialectR_distance_matrix, 4},
     {"_dialectR_leven", (DL_FUNC) &_dialectR_leven, 4},
-    {"_dialectR_split", (DL_FUNC) &_dialectR_split, 2},
     {"_dialectR_vc_leven", (DL_FUNC) &_dialectR_vc_leven, 4},
-    {"_dialectR_vc_leven_align", (DL_FUNC) &_dialectR_vc_leven_align, 2},
     {NULL, NULL, 0}
 };
 

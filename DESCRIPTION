@@ -1,17 +1,24 @@
 Package: dialectR
 Type: Package
-Title: What the Package Does in One
-    'Title Case' Line
+Title: Doing Dialectometry in R
 Version: 1.0
 Date: 2021-03-25
 Author: Ryan Soh-Eun Shim
 Maintainer: Ryan Soh-Eun Shim
     <soh-eun.shim@student.uni-tuebingen.de>
-Description: One paragraph
-    description of what the package
-    does as one or more full
-    sentences.
+Description: This packages provides functions for performing Dialectometry methods in R.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.5), magrittr, ggplot2
+Imports: Rcpp (>= 1.0.5), magrittr, ggplot2, deldir, ggvoronoi, dtw
 LinkingTo: Rcpp, RcppProgress
 SystemRequirements: C++11
+LazyData: true
+Config/reticulate:
+  list(
+    packages = list(
+      list(package = "numpy", pip = TRUE),
+      list(package = "sklearn", pip = TRUE),
+      list(package = "scipy", pip = TRUE),
+      list(package = "python_speech_features", pip = TRUE),
+      list(package = "speechpy", pip = TRUE),
+    )
+  )

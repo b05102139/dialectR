@@ -4,9 +4,20 @@
 
 using namespace Rcpp;
 
-
+//' Edit distance for Dialectometry
+//'
+//' An edit distance for use in Dialectometry. Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance.
+//'
+//' @param vec1 A vector of words.
+//' @param vec2 A vector of words to be compared against.
+//' @param alignment_normalization A logical value, indicating whether or not the difference scores are to be normalized by alignment length.
+//' @param delim An optional delimiter, in situations where multiple responses exist in the data.
+//' @return
+//' @export
+//'
+//' @examples
 // [[Rcpp::export]]
-Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim_ = R_NilValue){
+Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim = R_NilValue){
   int vec1Size=vec1.size();
   int vec2Size=vec2.size();
   if(vec1Size!=vec2Size) Rcpp::stop("The two vector inputs are not of same length.");
@@ -20,7 +31,7 @@ Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool
   int inCounter;
   int delCounter;
   NumericMatrix d;
-  if(delim_.isNull()){
+  if(delim.isNull()){
     for(int i=0;i<vec1Size;i++){
       inCounter=0;
       delCounter=0;
@@ -92,8 +103,8 @@ Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool
         }
       }
     }
-  } else if(delim_.isNotNull()){
-    std::string delim = String(delim_);
+  } else if(delim.isNotNull()){
+    std::string delim_ = String(delim);
     NumericMatrix bilbaoMatrix;
     int arr1Size;
     int arr2Size;
@@ -101,8 +112,8 @@ Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool
     for(int k=0;k<vec1Size;k++){
       str1=tiny_utf8::string(as<std::string>(vec1(k)));
       str2=tiny_utf8::string(as<std::string>(vec2(k)));
-      StringVector arr1=split(str1.c_str(), delim);
-      StringVector arr2=split(str2.c_str(), delim);
+      StringVector arr1=split(str1.c_str(), delim_);
+      StringVector arr2=split(str2.c_str(), delim_);
       arr1Size=arr1.size();
       arr2Size=arr2.size();
       NumericMatrix bilbaoMatrix(arr1Size, arr2Size);
