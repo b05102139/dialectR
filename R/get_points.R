@@ -1,5 +1,15 @@
+#' Get KML points from KML data
+#'
+#' Input a KML file path to get KML points data
+#'
+#' @param kml_file_path A file path to a KML file.
+#'
+#' @return
+#' @export
+#'
+#' @examples
 get_points <- function(kml_file_path){
-  tidykml::kml_points(kml_file_path) %>%
-    dplyr::select(name, longitude, latitude) %>%
-    as.data.frame()
+  points <- tidykml::kml_points(kml_file_path)
+  pointsSelect <- dplyr::select(points, name, longitude, latitude)
+  as.data.frame(pointsSelect)
 }

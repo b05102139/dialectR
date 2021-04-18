@@ -8,10 +8,11 @@ Maintainer: Ryan Soh-Eun Shim
     <soh-eun.shim@student.uni-tuebingen.de>
 Description: This packages provides functions for performing Dialectometry methods in R.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.5), magrittr, ggplot2, deldir, ggvoronoi, dtw
+Imports: Rcpp (>= 1.0.5), magrittr, ggplot2, deldir, ggvoronoi, dtw, tidykml
 LinkingTo: Rcpp, RcppProgress
 SystemRequirements: C++11
 LazyData: true
+Remotes: briatte/tidykml
 Config/reticulate:
   list(
     packages = list(

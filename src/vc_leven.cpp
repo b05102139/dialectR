@@ -202,14 +202,3 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
   }
   return res;
 }
-
-// df2align handle NA
-// RcppParallel
-// documentation (oxygen, README)
-// term paper
-// vc_align allow multiple response
-// pmi (try: "-" as basis of indel costs, and feed into weighted edit distance (since there are no "-"s in the original dataset))
-// mds_map and all to geom based?
-// dist -> generic function
-// ref-point-map
-// beam map?

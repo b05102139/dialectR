@@ -22,22 +22,22 @@ cluster_map <- function(dist_mat, kml_points, kml_polygon, cluster_num, method){
                 by.x="area",
                 by.y="name")
 
-  kml_points <- kml_points %>%
-    dplyr::select(longitude, latitude)
+  kml_points <- dplyr::select(kml_points, longitude, latitude)
   colnames(full_df) <- c("area", "grouping", "x", "y")
-  colnames(kml_polygon) <- c("longitude", "latitude", "group")
+  colnames(kml_polygon) <- c("group", "longitude", "latitude")
+  kml_polygon <-  dplyr::select(kml_polygon, longitude, latitude, group)
   unique_indices <- !deldir::duplicatedxy(full_df[,3:4])
   full_df <- full_df[unique_indices,]
 
-  ggplot(data = full_df,
-         aes(x = x,
-             y = y)) +
+  ggplot2::ggplot(data = full_df,
+                  ggplot2::aes(x = x,
+                               y = y)) +
     ggvoronoi::geom_voronoi(
-      mapping = aes(fill = as.factor(grouping)),
+      mapping = ggplot2::aes(fill = as.factor(grouping)),
       alpha = 0.8,
       outline = kml_polygon,
       color = "grey") +
-    theme(legend.position = "none") +
-    xlab("longitude") +
-    ylab("latitude")
+    ggplot2::theme(legend.position = "none") +
+    ggplot2::xlab("longitude") +
+    ggplot2::ylab("latitude")
 }
