@@ -1,4 +1,4 @@
-// Modified. Source of code: https://github.com/Bijaelo/RcppTinyUTF8/blob/master/src/printUTF8.cpp 
+// Source of code: https://github.com/Bijaelo/RcppTinyUTF8/blob/master/src/printUTF8.cpp 
 
 #ifndef TINYUTF8_TYPES_H
 #define TINYUTF8_TYPES_H

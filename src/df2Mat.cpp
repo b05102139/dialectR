@@ -1,3 +1,5 @@
+// Modified for string data. Source of original: https://stackoverflow.com/questions/24352208/best-way-to-convert-dataframe-to-matrix-in-rcpp
+
 #include <Rcpp.h>
 using namespace Rcpp;
 

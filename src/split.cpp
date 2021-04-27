@@ -1,4 +1,4 @@
-// Modified. Source of code from Stack Overflow question: https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
+// Modified for Rcpp. Source of original: https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
 
 #include <Rcpp.h>
 using namespace Rcpp;
