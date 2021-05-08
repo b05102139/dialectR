@@ -17,6 +17,8 @@ distance_matrix <- function(dialect_data, funname, alignment_normalization = FAL
 #' @export
 #'
 #' @examples
+#' # Example 1:
+#' leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
 leven <- function(vec1, vec2, alignment_normalization = FALSE, delim = NULL) {
     .Call(`_dialectR_leven`, vec1, vec2, alignment_normalization, delim)
 }
@@ -33,6 +35,8 @@ leven <- function(vec1, vec2, alignment_normalization = FALSE, delim = NULL) {
 #' @export
 #'
 #' @examples
+#' # Example 1:
+#' vc_leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
 vc_leven <- function(vec1, vec2, alignment_normalization = FALSE, delim = NULL) {
     .Call(`_dialectR_vc_leven`, vec1, vec2, alignment_normalization, delim)
 }

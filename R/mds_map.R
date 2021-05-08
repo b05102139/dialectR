@@ -6,11 +6,15 @@
 #' @param kml_points A dataframe of kml points, as retrieved by \code{\link{get_points()}}.
 #' @param kml_polygon A dataframe of kml polygons, as retrieved by \code{\link{get_polygons()}}.
 
-#' @importFrom magrittr %>%
-#' @return
+#' @return A map upon which the results of multidimensional scaling are projected upon.
 #' @export
 #'
 #' @examples
+#' # Example 1: An MDS map of Dutch dialects
+#' data(distDutch)
+#' dutch_points <- get_points(system.file("extdata", "DutchKML.kml", package="dialectR"))
+#' dutch_polygons <- get_polygons(system.file("extdata", "DutchKML.kml", package="dialectR"))
+#' mds_map(distDutch, dutch_points, dutch_polygons, 5, "ward.D2")
 mds_map <- function(dist_mat, kml_points, kml_polygon){
   dist_mds <- cmdscale(dist_mat, k = 3)
   x <- dist_mds[,1]

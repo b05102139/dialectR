@@ -16,8 +16,6 @@ using namespace Rcpp;
 //' @export
 //'
 //' @examples
-//' # Example 1:
-//' leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
 // [[Rcpp::export]]
 Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim = R_NilValue){
   int vec1Size=vec1.size();

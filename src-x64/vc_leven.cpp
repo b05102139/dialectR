@@ -1,12 +1,13 @@
 #include <Rcpp.h>
 #include "split.h"
+#include "checkVowelConsonant.h"
 #include "tinyutf8.h"
 
 using namespace Rcpp;
 
-//' Edit distance for Dialectometry
+//' VC-sensitive edit distance for Dialectometry
 //'
-//' An edit distance for use in Dialectometry. Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance.
+//' An edit distance that is sensitive to vowel and consonant alignment. If the aligned segments are a vowel-consonant pair, the difference is penalized as a score of 2; if not, 1.  Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance.
 //'
 //' @param vec1 A vector of words.
 //' @param vec2 A vector of words to be compared against.
@@ -16,10 +17,8 @@ using namespace Rcpp;
 //' @export
 //'
 //' @examples
-//' # Example 1:
-//' leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
 // [[Rcpp::export]]
-Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim = R_NilValue){
+Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim = R_NilValue){
   int vec1Size=vec1.size();
   int vec2Size=vec2.size();
   if(vec1Size!=vec2Size) Rcpp::stop("The two vector inputs are not of same length.");
@@ -48,7 +47,8 @@ Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool
       for(int i=1;i<lenStr1+1;i++){
         for(int j=1;j<lenStr2+1;j++){
           if(str1[i-1]==str2[j-1]) cost=0;
-          else cost=1;
+          else if(checkVowelConsonant(str1[i-1], str2[j-1])) cost=1;
+          else cost=2;
           tmp(0)=d(i-1,j)+1;
           tmp(1)=d(i,j-1)+1;
           tmp(2)=d(i-1,j-1)+cost;
@@ -135,7 +135,8 @@ Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool
           for(int i=1;i<lenStr1+1;i++){
             for(int j=1;j<lenStr2+1;j++){
               if(str1[i-1]==str2[j-1]) cost=0;
-              else cost=1;
+              else if(checkVowelConsonant(str1[i-1],str2[j-1])) cost=1;
+              else cost=2;
               tmp(0)=d(i-1,j)+1;
               tmp(1)=d(i,j-1)+1;
               tmp(2)=d(i-1,j-1)+cost;

@@ -21,3 +21,7 @@ leven(vec1, vec2, alignment_normalization = FALSE, delim = NULL)
 \description{
 An edit distance for use in Dialectometry. Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance.
 }
+\examples{
+# Example 1:
+leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
+}

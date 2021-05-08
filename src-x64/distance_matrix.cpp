@@ -28,10 +28,6 @@ XPtr<funcPtr> putFunPtrInXPtr(std::string fstr) {
 //' @export
 //'
 //' @examples
-//' # Example 1:
-//' data(Dutch)
-//' Dutch <- Dutch[1:3,1:3]
-//' distance_matrix(Dutch, funname = "vc_leven", alignment_normalization = TRUE)
 // [[Rcpp::depends(RcppProgress)]]
 #include <progress.hpp>
 #include <progress_bar.hpp>

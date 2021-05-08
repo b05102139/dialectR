@@ -10,8 +10,12 @@ get_points(kml_file_path)
 \item{kml_file_path}{A file path to a KML file.}
 }
 \value{
-
+A dataframe with the columns (area) name, longitude, and latitude.
 }
 \description{
 Input a KML file path to get KML points data
+}
+\examples{
+dutch_points <- get_points(system.file("extdata", "DutchKML.kml", package="dialectR"))
+dutch_points
 }

@@ -21,3 +21,7 @@ vc_leven(vec1, vec2, alignment_normalization = FALSE, delim = NULL)
 \description{
 An edit distance that is sensitive to vowel and consonant alignment. If the aligned segments are a vowel-consonant pair, the difference is penalized as a score of 2; if not, 1.  Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance.
 }
+\examples{
+# Example 1:
+vc_leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
+}

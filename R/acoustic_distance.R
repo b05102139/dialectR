@@ -12,6 +12,21 @@ speechpy <- NULL
   speechpy <<- reticulate::import("speechpy", delay_load = TRUE)
 }
 
+#' Acoustic distance based on Mel-Frequency Cepstral Coefficients
+#'
+#' This function implements an acoustic distance based on Mel-Frequency Cepstral Coefficients, which was proposed in Bartelds et al. (2020). With an input of two audio files in the Waveform Audio File Format (i.e. wav), the function will return a distance between the two audios.
+#'
+#' @param file1 The file to compare, which should be in the Waveform Audio File Format (i.e. wav).
+#' @param file2 The other audio file to compare against, again as a wav.
+#'
+#' @return A number, indicating the distance between the two audio files.
+#' @export
+#'
+#' @examples 
+#' # Example 1: The acoustic distance between i and e
+#' i_audio <- system.file("extdata", "i.wav", package="dialectR")
+#' e_audio <- system.file("extdata", "e.wav", package="dialectR")
+#' acoustic_distance(i_audio, e_audio)
 acoustic_distance <- function(file1, file2){
   file1 <- scipy$io$wavfile$read(file1)
   file2 <- scipy$io$wavfile$read(file2)

@@ -14,8 +14,15 @@ mds_map(dist_mat, kml_points, kml_polygon)
 \item{kml_polygon}{A dataframe of kml polygons, as retrieved by \code{\link{get_polygons()}}.}
 }
 \value{
-
+A map upon which the results of multidimensional scaling are projected upon.
 }
 \description{
 Input a distance matrix and kml data, where multidimensional scaling will be applied on the former and projected onto a map.
+}
+\examples{
+# Example 1: An MDS map of Dutch dialects
+data(distDutch)
+dutch_points <- get_points(system.file("extdata", "DutchKML.kml", package="dialectR"))
+dutch_polygons <- get_polygons(system.file("extdata", "DutchKML.kml", package="dialectR"))
+mds_map(distDutch, dutch_points, dutch_polygons, 5, "ward.D2")
 }
