@@ -2,13 +2,13 @@ Package: dialectR
 Type: Package
 Title: Doing Dialectometry in R
 Version: 1.0
-Date: 2021-03-25
+Date: 2021-05-09
 Author: Ryan Soh-Eun Shim
 Maintainer: Ryan Soh-Eun Shim
     <soh-eun.shim@student.uni-tuebingen.de>
-Description: This packages provides functions for performing Dialectometry methods in R.
+Description: dialectR provides functions for performing Dialectometry methods in R.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.5), magrittr, ggplot2, deldir, ggvoronoi, dtw, tidykml, reticulate
+Imports: Rcpp (>= 1.0.5), ggplot2, deldir, ggvoronoi, dtw, tidykml, reticulate, tidykml
 LinkingTo: Rcpp, RcppProgress
 SystemRequirements: C++11
 LazyData: true

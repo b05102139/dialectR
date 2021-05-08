@@ -13,7 +13,7 @@
 #' @examples
 #' Example 1:
 #' data(distDutch)
-#' get_clusters(distDutch, 5 ,"ward.2D")
+#' get_clusters(distDutch, 5 ,"ward.D2")
 get_clusters <- function(dist_mat, cluster_num, method){
   dist_mat[upper.tri(dist_mat)] <- NA
   dist_mat <- as.dist(dist_mat)
