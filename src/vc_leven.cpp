@@ -60,13 +60,13 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
       if (alignment_normalization){
         int tmpLenStr1=lenStr1;
         int tmpLenStr2=lenStr2;
-        while (tmpLenStr1>0|tmpLenStr2>0){
+        while ((tmpLenStr1>0)|(tmpLenStr2>0)){
           int diaCell;
           int leftCell;
           int upCell;
-          if (tmpLenStr1-1>=0&tmpLenStr2-1>=0){
+          if ((tmpLenStr1-1>=0)&(tmpLenStr2-1>=0)){
             diaCell = d(tmpLenStr1-1,tmpLenStr2-1);
-          } else if(tmpLenStr1-1<0|tmpLenStr2-1<0){
+          } else if((tmpLenStr1-1<0)|(tmpLenStr2-1<0)){
             diaCell=std::numeric_limits<int>::max();
           }
           if (tmpLenStr2-1>=0){
@@ -148,13 +148,13 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
           if (alignment_normalization){
             int tmpLenStr1=lenStr1;
             int tmpLenStr2=lenStr2;
-            while (tmpLenStr1>0|tmpLenStr2>0){
+            while ((tmpLenStr1>0)|(tmpLenStr2>0)){
               int diaCell;
               int leftCell;
               int upCell;
-              if (tmpLenStr1-1>=0&tmpLenStr2-1>=0){
+              if ((tmpLenStr1-1>=0)&(tmpLenStr2-1>=0)){
                 diaCell = d(tmpLenStr1-1,tmpLenStr2-1);
-              } else if(tmpLenStr1-1<0|tmpLenStr2-1<0){
+              } else if((tmpLenStr1-1<0)|(tmpLenStr2-1<0)){
                 diaCell=std::numeric_limits<int>::max();
               }
               if (tmpLenStr2-1>=0){
