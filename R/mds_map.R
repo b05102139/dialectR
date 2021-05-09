@@ -14,7 +14,7 @@
 #' data(distDutch)
 #' dutch_points <- get_points(system.file("extdata", "DutchKML.kml", package="dialectR"))
 #' dutch_polygons <- get_polygons(system.file("extdata", "DutchKML.kml", package="dialectR"))
-#' mds_map(distDutch, dutch_points, dutch_polygons, 5, "ward.D2")
+#' mds_map(distDutch, dutch_points, dutch_polygons)
 mds_map <- function(dist_mat, kml_points, kml_polygon){
   dist_mds <- cmdscale(dist_mat, k = 3)
   x <- dist_mds[,1]

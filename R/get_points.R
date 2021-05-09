@@ -11,7 +11,15 @@
 #' dutch_points <- get_points(system.file("extdata", "DutchKML.kml", package="dialectR"))
 #' dutch_points
 get_points <- function(kml_file_path){
-  points <- tidykml::kml_points(kml_file_path)
-  pointsSelect <- dplyr::select(points, name, longitude, latitude)
-  as.data.frame(pointsSelect)
+  kml_object <- sf::st_read(kml_file_path, quiet = TRUE)
+  kml_attributes <- attributes(kml_object$geometry)
+  kml_points <- kml_attributes$classes
+  kml_names <- kml_object$Name
+  kml_points_index <- kml_points %in% "POINT"
+  kml_points <- kml_object$geometry[kml_points_index]
+  kml_points <- t(sapply(kml_points, function(x){x[1:2]}))
+  kml_names <- kml_names[kml_points_index]
+  res <- cbind(kml_names, kml_points)
+  colnames(res) <- c("name", "longitude", "latitude")
+  res
 }

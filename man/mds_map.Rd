@@ -24,5 +24,5 @@ Input a distance matrix and kml data, where multidimensional scaling will be app
 data(distDutch)
 dutch_points <- get_points(system.file("extdata", "DutchKML.kml", package="dialectR"))
 dutch_polygons <- get_polygons(system.file("extdata", "DutchKML.kml", package="dialectR"))
-mds_map(distDutch, dutch_points, dutch_polygons, 5, "ward.D2")
+mds_map(distDutch, dutch_points, dutch_polygons)
 }

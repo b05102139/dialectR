@@ -24,11 +24,12 @@ speechpy <- NULL
 #'
 #' @examples 
 #' # Example 1: The acoustic distance between i and e
-#' \donttest{
+#' 
 #' i_audio <- system.file("extdata", "i.wav", package="dialectR")
 #' e_audio <- system.file("extdata", "e.wav", package="dialectR")
-#' acoustic_distance(i_audio, e_audio)
-#' }
+#' try(acoustic_distance(i_audio, e_audio),
+#'  message("Python not available for testing"),
+#'  silent = TRUE)
 acoustic_distance <- function(file1, file2){
   file1 <- scipy$io$wavfile$read(file1)
   file2 <- scipy$io$wavfile$read(file2)

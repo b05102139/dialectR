@@ -22,7 +22,7 @@ A dataframe with the two columns area and (clustering) grouping.
 Input a distance matrix and returns a dataframe with two columns: area and clustering grouping, where a choice of clustering method is provided.
 }
 \examples{
-Example 1:
+# Example 1:
 data(distDutch)
-get_clusters(distDutch, 5 ,"ward.2D")
+get_clusters(distDutch, 5 ,"ward.D2")
 }

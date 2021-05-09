@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-#' Example 1:
+#' # Example 1:
 #' data(distDutch)
 #' get_clusters(distDutch, 5 ,"ward.D2")
 get_clusters <- function(dist_mat, cluster_num, method){
