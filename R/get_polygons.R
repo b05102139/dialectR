@@ -21,6 +21,10 @@ get_polygons <- function(kml_file_path){
   kml_names <- kml_names[kml_polygons_index]
   kml_names <- rep(kml_names, sapply(kml_polygons, function(x){length(x[[1]][,1])}))
   res <- cbind(kml_names, kml_polygons_all)
+  res <- data.frame(res)
   colnames(res) <- c("name", "longitude", "latitude")
+  res[,2] <- as.numeric(res[,2])
+  res[,3] <- as.numeric(res[,3])
   res
 }
+

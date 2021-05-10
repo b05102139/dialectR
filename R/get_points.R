@@ -20,6 +20,9 @@ get_points <- function(kml_file_path){
   kml_points <- t(sapply(kml_points, function(x){x[1:2]}))
   kml_names <- kml_names[kml_points_index]
   res <- cbind(kml_names, kml_points)
+  res <- data.frame(res)
   colnames(res) <- c("name", "longitude", "latitude")
+  res[,2] <- as.numeric(res[,2])
+  res[,3] <- as.numeric(res[,3])
   res
 }
