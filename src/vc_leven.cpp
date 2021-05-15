@@ -13,11 +13,8 @@ using namespace Rcpp;
 //' @param vec2 A vector of words to be compared against.
 //' @param alignment_normalization A logical value, indicating whether or not the difference scores are to be normalized by alignment length.
 //' @param delim An optional delimiter, in situations where multiple responses exist in the data.
-//' @return
-//' @export
-//'
+//' @return A number indicating the number of operations to transform a string to the other, which optionally may undergo length normalization.
 //' @examples
-//' # Example 1:
 //' vc_leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
 // [[Rcpp::export]]
 Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim = R_NilValue){

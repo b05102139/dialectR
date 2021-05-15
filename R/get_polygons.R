@@ -16,15 +16,63 @@ get_polygons <- function(kml_file_path){
   kml_polygons <- kml_attributes$classes
   kml_names <- kml_object$Name
   kml_polygons_index <- kml_polygons %in% "POLYGON"
-  kml_polygons <- kml_object$geometry[kml_polygons_index]
-  kml_polygons_all <- do.call(rbind, sapply(kml_polygons, function(x){x[[1]][,1:2]}))
-  kml_names <- kml_names[kml_polygons_index]
-  kml_names <- rep(kml_names, sapply(kml_polygons, function(x){length(x[[1]][,1])}))
-  res <- cbind(kml_names, kml_polygons_all)
-  res <- data.frame(res)
-  colnames(res) <- c("name", "longitude", "latitude")
-  res[,2] <- as.numeric(res[,2])
-  res[,3] <- as.numeric(res[,3])
+  
+  if (sum(kml_polygons_index) == 1){
+    kml_polygons <- kml_object$geometry[kml_polygons_index]
+    kml_polygons_all <- kml_polygons[[1]][[1]][,1:2]
+    kml_names <- kml_names[kml_polygons_index]
+    kml_names <- rep(kml_names, sapply(kml_polygons, function(x){length(x[[1]][,1])}))
+    res_poly <- cbind(kml_names, kml_polygons_all)
+    res_poly <- data.frame(res_poly)
+    colnames(res_poly) <- c("name", "longitude", "latitude")
+    res_poly[,2] <- as.numeric(res_poly[,2])
+    res_poly[,3] <- as.numeric(res_poly[,3])
+    res_poly
+  } else if (sum(kml_polygons_index) > 1){
+    kml_polygons <- kml_object$geometry[kml_polygons_index]
+    kml_polygons_all <- do.call(rbind, sapply(kml_polygons, function(x){x[[1]][,1:2]}))
+    kml_names <- kml_names[kml_polygons_index]
+    kml_names <- rep(kml_names, sapply(kml_polygons, function(x){length(x[[1]][,1])}))
+    res_poly <- cbind(kml_names, kml_polygons_all)
+    res_poly <- data.frame(res_poly)
+    colnames(res_poly) <- c("name", "longitude", "latitude")
+    res_poly[,2] <- as.numeric(res_poly[,2])
+    res_poly[,3] <- as.numeric(res_poly[,3])
+    res_poly
+  }
+  kml_polygons_index <- kml_polygons %in% "MULTIPOLYGON"
+  if (sum(kml_polygons_index) == 1){
+    kml_polygons <- kml_object$geometry[kml_polygons_index]
+    kml_polygons_all <-kml_polygons[[1]][[1]][[1]][,1:2]
+    kml_names <- kml_names[kml_polygons_index]
+    kml_names <- rep(kml_names, sapply(kml_polygons, function(x){length(x[[1]][[1]][,1])}))
+    res_multi <- cbind(kml_names, kml_polygons_all)
+    res_multi <- data.frame(res_multi)
+    colnames(res_multi) <- c("name", "longitude", "latitude")
+    res_multi[,2] <- as.numeric(res_multi[,2])
+    res_multi[,3] <- as.numeric(res_multi[,3])
+    res_multi
+  } else if (sum(kml_polygons_index) > 1){
+    kml_polygons <- kml_object$geometry[kml_polygons_index]
+    kml_polygons_all <- do.call(rbind, sapply(kml_polygons, function(x){x[[1]][[1]][,1:2]}))
+    kml_names <- kml_names[kml_polygons_index]
+    kml_names <- rep(kml_names, sapply(kml_polygons, function(x){length(x[[1]][[1]][,1])}))
+    res_multi <- cbind(kml_names, kml_polygons_all)
+    res_multi <- data.frame(res_multi)
+    colnames(res_multi) <- c("name", "longitude", "latitude")
+    res_multi[,2] <- as.numeric(res_multi[,2])
+    res_multi[,3] <- as.numeric(res_multi[,3])
+    res_multi
+  }
+  if (exists("res_poly") & exists("res_multi")){
+    res <- rbind(res_poly, res_multi)
+  } else if (exists("res_poly")){
+    res <- res_poly
+  } else if (exists("res_multi")){
+    res <- res_multi
+  }
+  if (!exists("res")){
+    res <- NULL
+  }
   res
 }
-

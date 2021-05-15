@@ -1,3 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
+^\.Rhistory$
+^\.gitignore$
+^\.git$
+^Rmd$
+^o$
+^dll$

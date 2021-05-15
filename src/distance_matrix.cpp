@@ -24,11 +24,8 @@ XPtr<funcPtr> putFunPtrInXPtr(std::string fstr) {
 //' @param funname The distance metric to be used. This can be chosen from the following: "leven", "vc_leven".
 //' @param alignment_normalization A logical value, indicating whether or not the distance scores should be normalized by alignment length.
 //' @param delim_ An optional delimiter, in situations where multiple responses exist in the data.
-//' @return
-//' @export
-//'
+//' @return A distance matrix, where the values are the difference between dialects based on edit distance.
 //' @examples
-//' # Example 1:
 //' data(Dutch)
 //' Dutch <- Dutch[1:3,1:3]
 //' distance_matrix(Dutch, funname = "vc_leven", alignment_normalization = TRUE)

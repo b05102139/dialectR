@@ -16,12 +16,11 @@ leven(vec1, vec2, alignment_normalization = FALSE, delim = NULL)
 \item{delim}{An optional delimiter, in situations where multiple responses exist in the data.}
 }
 \value{
-
+A number indicating the number of operations to transform a string to the other, which optionally may undergo length normalization.
 }
 \description{
 An edit distance for use in Dialectometry. Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance.
 }
 \examples{
-# Example 1:
 leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
 }
