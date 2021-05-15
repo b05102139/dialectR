@@ -7,7 +7,7 @@ Authors@R: person(given = "Soh-Eun", family = "Shim", email = "soh-eun.shim@stud
                   role = c("aut", "cre"))
 Description: Provides functions for Dialectometric methods in R, such as produced by Gabmap.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.5), ggplot2, deldir, ggvoronoi, dtw, reticulate, sf, dplyr, grDevices, tibble, fpc
+Imports: Rcpp (>= 1.0.5), ggplot2, deldir, ggvoronoi, dtw, reticulate, sf, dplyr, grDevices, tibble
 LinkingTo: Rcpp, RcppProgress
 SystemRequirements: C++11
 LazyData: true

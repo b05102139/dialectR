@@ -3,13 +3,9 @@
 \docType{data}
 \name{distDutch}
 \alias{distDutch}
-\title{Results of applying VC-levenshtein distance on the \code{\link{Dutch}} dataset.}
+\title{Results of applying VC-levenshtein distance on the \code{\link{Dutch}} dataset}
 \format{
-A matrix with 613 rows and 613 variables:
-\describe{
-  \item{Aalsmeer NH}{A location in the list of data collection sites}
-  ...
-}
+A dataframe with 613 rows and 613 variables
 }
 \source{
 \url{https://gabmap.nl/examples/}
@@ -19,5 +15,8 @@ distDutch
 }
 \description{
 A dataset containing the results of applying VC-levenshtein distance on the \code{\link{Dutch}} dataset, which in turn is retrieved from the Goeman-Taeldeman-Van Reenen-Project.
+}
+\references{
+\url{https://www.meertens.knaw.nl/projecten/mand/EGTRPdatata.html}
 }
 \keyword{datasets}
