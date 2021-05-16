@@ -8,8 +8,7 @@
 #' @export
 #'
 #' @examples
-#' 
-#' ## Example 1: Dutch distance matrix to Dutch dataframe
+#' # Example 1: Dutch distance matrix to Dutch dataframe
 #' data(distDutch)
 #' distmat_to_df(distDutch)
 distmat_to_df <- function(dist_matrix){

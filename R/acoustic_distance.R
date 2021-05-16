@@ -8,7 +8,7 @@
 
 #' Acoustic distance based on Mel-Frequency Cepstral Coefficients
 #'
-#' This function implements an acoustic distance based on Mel-Frequency Cepstral Coefficients, which was proposed in Bartelds et al. (2020). With an input of two audio files in the Waveform Audio File Format (i.e. wav), the function will return a distance between the two audios.
+#' This function implements an acoustic distance based on Mel-Frequency Cepstral Coefficients, upon which dynamic time warping is used to produce the results. With an input of two audio files in the Waveform Audio File Format (i.e. wav), the function will return a distance between the two audios.
 #'
 #' @param file1 The file to compare, which should be in the Waveform Audio File Format (i.e. wav).
 #' @param file2 The other audio file to compare against, again as a wav.

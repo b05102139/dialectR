@@ -28,5 +28,5 @@ Input a distance matrix, upon which clustering will be performed and projected u
 data(distDutch)
 dutch_points <- get_points(system.file("extdata", "DutchKML.kml", package="dialectR"))
 dutch_polygons <- get_polygons(system.file("extdata", "DutchKML.kml", package="dialectR"))
-cluster_map(distDutch, dutch_points, dutch_polygons, 5, "ward.D2")
+cluster_map(distDutch[1:100,1:100], dutch_points, dutch_polygons, 5, "ward.D2")
 }

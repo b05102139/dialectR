@@ -1,19 +1,17 @@
-// Modified for Rcpp. Source of original: https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
-
 #include <Rcpp.h>
 using namespace Rcpp;
 
 StringVector split(std::string s, std::string delimiter) {
-  size_t pos_start = 0, pos_end, delim_len = delimiter.length();
-  String token;
+  size_t posStart = 0, posEnd, delimLen = delimiter.length();
+  String word;
   StringVector res;
   
-  while ((pos_end = s.find (delimiter, pos_start)) != std::string::npos) {
-    token = s.substr (pos_start, pos_end - pos_start);
-    pos_start = pos_end + delim_len;
-    res.push_back (token);
+  while ((posEnd = s.find (delimiter, posStart)) != std::string::npos) {
+    word = s.substr (posStart, posEnd - posStart);
+    posStart = posEnd + delimLen;
+    res.push_back(word);
   }
   
-  res.push_back(s.substr(pos_start));
+  res.push_back(s.substr(posStart));
   return res;
 }

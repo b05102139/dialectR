@@ -16,8 +16,7 @@ A dataframe with the columns "row", "col", and "dist".
 Input a distance matrix, with which a dataframe will be returned with the three columns of "row", "col", and "dist". The first two correspond with the rows and columns in the distance matrix, and the last refers to their crossing point, where the distance between them is given.
 }
 \examples{
-
-## Example 1: Dutch distance matrix to Dutch dataframe
+# Example 1: Dutch distance matrix to Dutch dataframe
 data(distDutch)
 distmat_to_df(distDutch)
 }

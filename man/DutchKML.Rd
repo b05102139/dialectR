@@ -7,7 +7,7 @@
 \url{https://gabmap.nl/examples/}
 }
 \description{
-This is a a KML file which marks the locations where the \code{\link{Dutch}} dataset was collected.
+This is a KML file which marks the locations where the \code{\link{Dutch}} dataset was collected.
 }
 \references{
 \url{https://www.meertens.knaw.nl/projecten/mand/EGTRPdatata.html}

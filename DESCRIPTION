@@ -5,7 +5,7 @@ Version: 1.0
 Date: 2021-05-09
 Authors@R: person(given = "Soh-Eun", family = "Shim", email = "soh-eun.shim@student.uni-tuebingen.de",
                   role = c("aut", "cre"))
-Description: Provides functions for Dialectometric methods in R, such as produced by Gabmap.
+Description: Provides functions for common methods in dialectometry.
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.5), ggplot2, deldir, ggvoronoi, dtw, reticulate, sf, dplyr, grDevices, tibble
 LinkingTo: Rcpp, RcppProgress
