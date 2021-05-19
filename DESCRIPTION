@@ -5,7 +5,7 @@ Version: 1.0
 Date: 2021-05-09
 Authors@R: person(given = "Soh-Eun", family = "Shim", email = "soh-eun.shim@student.uni-tuebingen.de",
                   role = c("aut", "cre"))
-Description: Provides functions for common methods in dialectometry.
+Description: Quantitative approaches to dialectology based primarily on modifications of edit distance, which is more commonly known as the field of dialectometry. For further reference on the school of thought associated with these methods, see Wieling & Nerbonne (2015), <https://www.annualreviews.org/doi/10.1146/annurev-linguist-030514-124930>.
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.5), ggplot2, deldir, ggvoronoi, dtw, reticulate, sf, dplyr, grDevices, tibble
 LinkingTo: Rcpp, RcppProgress

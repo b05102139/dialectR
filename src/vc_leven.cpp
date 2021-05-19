@@ -7,13 +7,15 @@ using namespace Rcpp;
 
 //' VC-sensitive edit distance for Dialectometry
 //'
-//' An edit distance that is sensitive to vowel and consonant alignment. If the aligned segments are a vowel-consonant pair, the difference is penalized as a score of 2; if not, 1.  Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance.
+//' An edit distance that is sensitive to vowel and consonant alignment. If the aligned segments are a vowel-consonant pair, the difference is penalized as a score of 2; if not, 1.  Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance, as proposed by Aurrekoetxea et al (2020).
 //'
 //' @param vec1 A vector of words.
 //' @param vec2 A vector of words to be compared against.
 //' @param alignment_normalization A logical value, indicating whether or not the difference scores are to be normalized by alignment length.
 //' @param delim An optional delimiter, in situations where multiple responses exist in the data.
 //' @return A number indicating the number of operations to transform a string to the other, which optionally may undergo length normalization.
+//' @references
+//' Aurrekoetxea, G., Nerbonne, J., and Rubio, J. 2020. Unifying Analyses of Multiple Responses. **Dialectologia**, 25:59–86.
 //' @examples
 //' vc_leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
 // [[Rcpp::export]]

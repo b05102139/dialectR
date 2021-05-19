@@ -15,7 +15,7 @@ acoustic_distance(file1, file2)
 A number, indicating the distance between the two audio files.
 }
 \description{
-This function implements an acoustic distance based on Mel-Frequency Cepstral Coefficients, upon which dynamic time warping is used to produce the results. With an input of two audio files in the Waveform Audio File Format (i.e. wav), the function will return a distance between the two audios.
+This function implements an acoustic distance based on Mel-Frequency Cepstral Coefficients, upon which dynamic time warping is used to produce the results, as proposed by Bartelds et al. (2020). With an input of two audio files in the Waveform Audio File Format (i.e. wav), the function will return a distance between the two audios.
 }
 \examples{
 # Example 1: The acoustic distance between i and e
@@ -25,4 +25,8 @@ e_audio <- system.file("extdata", "e.wav", package="dialectR")
 try(acoustic_distance(i_audio, e_audio),
  message("Python not available for testing"),
  silent = TRUE)
+}
+\references{
+Bartelds, M., Richter, C., Liberman, M., and Wieling, M. 2020. A New Acoustic-Based
+Pronunciation Distance Measure. **Frontiers in Artificial Intelligence**, 3, May. \doi{10.3389/frai.2020.00039}
 }

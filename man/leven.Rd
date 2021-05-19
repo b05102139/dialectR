@@ -19,8 +19,11 @@ leven(vec1, vec2, alignment_normalization = FALSE, delim = NULL)
 A number indicating the number of operations to transform a string to the other, which optionally may undergo length normalization.
 }
 \description{
-An edit distance for use in Dialectometry. Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance.
+An edit distance for use in Dialectometry. Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance, as proposed by Aurrekoetxea et al (2020).
 }
 \examples{
 leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
+}
+\references{
+Aurrekoetxea, G., Nerbonne, J., and Rubio, J. 2020. Unifying Analyses of Multiple Responses. **Dialectologia**, 25:59–86.
 }

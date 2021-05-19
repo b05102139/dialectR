@@ -1,44 +1,11 @@
-#' numpy module
-#'
-#' Interface to numpy module.
-#'
-#' @format numpy module
-#' @export
-#' @rdname modules
-numpy <- NULL
+# environment variable for storing Python modules
+.pkg.env <- new.env(parent = emptyenv())
 
-#' sklearn module
-#'
-#' Interface to sklearn module.
-#'
-#' @format sklearn module
-#' @export
-#' @rdname modules
-sklearn <- NULL
-
-#' scipy module
-#'
-#' Interface to scipy module.
-#'
-#' @format scipy module
-#' @export
-#' @rdname modules
-scipy <- NULL
-
-#' python_speech_features module
-#'
-#' Interface to python_speech_features module.
-#'
-#' @format python_speech_features module
-#' @export
-#' @rdname modules
-python_speech_features <- NULL
-
-#' speechpy module
-#'
-#' Interface to speechpy module.
-#'
-#' @format speechpy module
-#' @export
-#' @rdname modules
-speechpy <- NULL
+.onLoad <- function(libname, pkgname) {
+  reticulate::configure_environment(pkgname)
+  assign("numpy", reticulate::import("numpy", delay_load = TRUE), .pkg.env)
+  assign("sklearn", reticulate::import("sklearn", delay_load = TRUE), .pkg.env)
+  assign("scipy", reticulate::import("scipy", delay_load = TRUE), .pkg.env)
+  assign("python_speech_features", reticulate::import("python_speech_features", delay_load = TRUE), .pkg.env)
+  assign("speechpy", reticulate::import("speechpy", delay_load = TRUE), .pkg.env)
+}
