@@ -7,7 +7,7 @@
 #'
 #' @references
 #' Bartelds, M., Richter, C., Liberman, M., and Wieling, M. 2020. A New Acoustic-Based
-#' Pronunciation Distance Measure. **Frontiers in Artificial Intelligence**, 3, May. \doi{10.3389/frai.2020.00039}
+#' Pronunciation Distance Measure. \emph{Frontiers in Artificial Intelligence}, 3, May. \doi{10.3389/frai.2020.00039}
 #' 
 #' @return A number, indicating the distance between the two audio files.
 #' @export

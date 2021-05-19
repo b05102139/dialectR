@@ -25,5 +25,5 @@ An edit distance that is sensitive to vowel and consonant alignment. If the alig
 vc_leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
 }
 \references{
-Aurrekoetxea, G., Nerbonne, J., and Rubio, J. 2020. Unifying Analyses of Multiple Responses. **Dialectologia**, 25:59–86.
+Aurrekoetxea, G., Nerbonne, J., and Rubio, J. 2020. Unifying Analyses of Multiple Responses. \emph{Dialectologia}, 25:59–86.
 }
