@@ -1,6 +1,7 @@
 #' Wav file of "i" in the international phonetic alphabet
 #'
 #' This is a wav file which contains the pronunciation of "i" in the international phonetic alphabet.
+#'
 #' @source \url{http://www.phonetics.ucla.edu/course/chapter1/vowels.html}
 #' @docType data
 #' @name i
