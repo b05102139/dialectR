@@ -20,7 +20,7 @@
 #' try(acoustic_distance(i_audio, e_audio),
 #'  message("Python not available for testing"),
 #'  silent = TRUE)
-acoustic_distance <- function(file1, file2){
+acoustic_distance <- function(file1, file2, ...){
   file1 <- .pkg.env$scipy$io$wavfile$read(file1)
   file2 <- .pkg.env$scipy$io$wavfile$read(file2)
   mfcc1 <- .pkg.env$python_speech_features$mfcc(file1[[2]],
@@ -31,7 +31,8 @@ acoustic_distance <- function(file1, file2){
                                 numcep = as.integer(12),
                                 appendEnergy = TRUE,
                                 winfunc = .pkg.env$numpy$hamming,
-                                nfft=as.integer(1024))
+                                nfft=as.integer(1200),
+                                ...)
   mfcc2 <- .pkg.env$python_speech_features$mfcc(file2[[2]],
                                        file2[[1]],
                                        winlen = 0.025,
@@ -40,7 +41,8 @@ acoustic_distance <- function(file1, file2){
                                        numcep = as.integer(12),
                                        appendEnergy = TRUE,
                                        winfunc = .pkg.env$numpy$hamming,
-                                       nfft=as.integer(1024))
+                                       nfft=as.integer(1200),
+                                       ...)
   deltas1 <- .pkg.env$python_speech_features$delta(mfcc1, as.integer(2))
   double_deltas1 <- .pkg.env$python_speech_features$delta(deltas1, as.integer(2))
   deltas2 <- .pkg.env$python_speech_features$delta(mfcc2, as.integer(2))
