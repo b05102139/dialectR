@@ -32,6 +32,7 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
   Rcpp::NumericVector res(vec1Size);
   int inCounter;
   int delCounter;
+  NumericMatrix forbid;
   NumericMatrix d;
   if(delim.isNull()){
     for(int i=0;i<vec1Size;i++){
@@ -42,18 +43,26 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
       lenStr1=str1.length();
       lenStr2=str2.length();
       NumericMatrix d(lenStr1+1,lenStr2+1);
+      NumericMatrix forbid(lenStr1+1,lenStr2+1);
       for(int i=0;i<lenStr1+1;i++)d(i,0)=i;
       for(int j=0;j<lenStr2+1;j++)d(0,j)=j;
       cost=0;
       for(int i=1;i<lenStr1+1;i++){
         for(int j=1;j<lenStr2+1;j++){
           if(str1[i-1]==str2[j-1]) cost=0;
-          else if(checkVowelConsonant(str1[i-1], str2[j-1])) cost=1;
-          else cost=2;
+          else cost=1;
           tmp(0)=d(i-1,j)+1;
           tmp(1)=d(i,j-1)+1;
           tmp(2)=d(i-1,j-1)+cost;
+          if(!checkVowelConsonant(str1[i-1], str2[j-1])){
+            forbid(i,j)=1;
+          }
           d(i,j)=min(tmp);
+        }
+      }
+      for (int m=1; m<lenStr1+1; m++){
+        for (int n=1; n<lenStr2+1; n++){
+          if (forbid(m,n)==1) d(m,n) = std::numeric_limits<int>::max();
         }
       }
       if (alignment_normalization){
@@ -136,12 +145,19 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
           for(int i=1;i<lenStr1+1;i++){
             for(int j=1;j<lenStr2+1;j++){
               if(str1[i-1]==str2[j-1]) cost=0;
-              else if(checkVowelConsonant(str1[i-1],str2[j-1])) cost=1;
-              else cost=2;
+              else cost=1;
               tmp(0)=d(i-1,j)+1;
               tmp(1)=d(i,j-1)+1;
               tmp(2)=d(i-1,j-1)+cost;
+              if(!checkVowelConsonant(str1[i-1], str2[j-1])){
+                forbid(i,j)=1;
+              }
               d(i,j)=min(tmp);
+            }
+          }
+          for (int m=1; m<lenStr1+1; m++){
+            for (int n=1; n<lenStr2+1; n++){
+              if (forbid(m,n)==1) d(m,n) = std::numeric_limits<int>::max();
             }
           }
           if (alignment_normalization){
