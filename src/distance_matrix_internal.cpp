@@ -24,7 +24,7 @@ Rcpp::NumericMatrix distance_matrix_internal(Rcpp::StringMatrix dialect_data, bo
   NumericMatrix d = no_init_matrix(n, n);
     for(int i=0; i<n;i++){
       for(int j=i+1; j<n;j++){
-        NumericVector diffs=leven(dialect_matrix(i,_), dialect_matrix(j,_), alignment_normalization, delim);
+        NumericVector diffs=leven(dialect_data(i,_), dialect_data(j,_), alignment_normalization, delim);
         int naCount=sum(Rcpp::is_na(diffs));
         d(i,j)=sum(na_omit(diffs)) / (n-naCount);
         d(j,i)=d(i,j);
