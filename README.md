@@ -91,7 +91,7 @@ mds_map(distDutch, dutch_points, dutch_polygons)
 And here we present that of hierarchical clustering:
 
 ``` r
-cluster_map(distDutch, cluster_num = 6, method = "ward.D2", dutch_points, dutch_polygons)
+cluster_map(distDutch, cluster_num = 6, method = "ward.D2", kml_points = dutch_points, kml_polygon = dutch_polygons)
 ```
 
 <img src="README_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
@@ -139,13 +139,8 @@ Now we are in a place to apply multidimensional scaling on the data:
 
 ``` r
 vowel_mds <- cmdscale(vowel_dist, k = 3)
-plot(-vowel_mds[,2],
-     vowel_mds[,1])
-text(-vowel_mds[,2],
-     vowel_mds[,1],
-     cex=1,
-     labels = vowel_names,
-     pos = 2)
+plot(-vowel_mds[,2], vowel_mds[,1])
+text(-vowel_mds[,2], vowel_mds[,1], cex = 1, labels = vowel_names, pos = 2)
 ```
 
 <img src="README_files/figure-gfm/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
