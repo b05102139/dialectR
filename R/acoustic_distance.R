@@ -4,6 +4,7 @@
 #'
 #' @param file1 The file to compare, which should be in the Waveform Audio File Format (i.e. wav).
 #' @param file2 The other audio file to compare against, again as a wav.
+#' @param ... Additional arguments that are passed on to the mfcc function.
 #'
 #' @references
 #' Bartelds, M., Richter, C., Liberman, M., and Wieling, M. 2020. A New Acoustic-Based
