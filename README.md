@@ -143,12 +143,13 @@ plot(-vowel_mds[,2],
      vowel_mds[,1])
 text(-vowel_mds[,2],
      vowel_mds[,1],
-     cex=0.8,
+     cex=1,
      labels = vowel_names,
-     pos = 4)
+     pos = 2)
 ```
 
 <img src="README_files/figure-gfm/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+
 As can be seen, the distance between the vowels largely correlates with
 conventional charts of the acoustic vowel space.
 
