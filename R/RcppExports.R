@@ -14,7 +14,7 @@
 #' data(Dutch)
 #' Dutch <- Dutch[1:3,1:3]
 #' distance_matrix_internal(as.matrix(Dutch), alignment_normalization = TRUE)
-distance_matrix_internal <- function(dialect_data, alignment_normalization = FALSE, delim = NULL) {
+.distance_matrix_internal <- function(dialect_data, alignment_normalization = FALSE, delim = NULL) {
     .Call(`_dialectR_distance_matrix_internal`, dialect_data, alignment_normalization, delim)
 }
 

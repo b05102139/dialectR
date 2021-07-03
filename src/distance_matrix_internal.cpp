@@ -17,7 +17,7 @@ using namespace Rcpp;
 //' data(Dutch)
 //' Dutch <- Dutch[1:3,1:3]
 //' distance_matrix_internal(as.matrix(Dutch), alignment_normalization = TRUE)
-// [[Rcpp::export]]
+// [[Rcpp::export(.distance_matrix_internal)]]
 Rcpp::NumericMatrix distance_matrix_internal(Rcpp::StringMatrix dialect_data, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim = R_NilValue){
   int n = dialect_data.nrow();
   Progress p(sum(seq(1,n-1)),true);

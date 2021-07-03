@@ -15,7 +15,7 @@ distance_matrix <- function(dialect_data, alignment_normalization = FALSE, delim
   if(!is.matrix(dialect_data)){
     dialect_data <- as.matrix(dialect_data)
   }
-  res <- distance_matrix_internal(dialect_data, alignment_normalization, delim)
+  res <- .distance_matrix_internal(dialect_data, alignment_normalization, delim)
   original_rownames <- rownames(dialect_data)
   rownames(res) <- original_rownames
   colnames(res) <- original_rownames
