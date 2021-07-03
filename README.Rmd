@@ -17,7 +17,6 @@ As a preliminary example, we will examine data of Dutch dialects, which was tran
 ```{r}
 library(dialectR)
 data(Dutch)
-Dutch[1:3, 1:3]
 ```
 
 This dataset provides data of 562 concepts over 613 sites of Dutch speaking areas, where the concepts should be columns and the sites should be rows. 
