@@ -5,17 +5,16 @@
 
 using namespace Rcpp;
 
-// distance_matrix
-Rcpp::NumericMatrix distance_matrix(Rcpp::DataFrame dialect_data, std::string funname, bool alignment_normalization, Rcpp::Nullable<std::string> delim);
-RcppExport SEXP _dialectR_distance_matrix(SEXP dialect_dataSEXP, SEXP funnameSEXP, SEXP alignment_normalizationSEXP, SEXP delimSEXP) {
+// distance_matrix_internal
+Rcpp::NumericMatrix distance_matrix_internal(Rcpp::StringMatrix dialect_data, bool alignment_normalization, Rcpp::Nullable<std::string> delim);
+RcppExport SEXP _dialectR_distance_matrix_internal(SEXP dialect_dataSEXP, SEXP alignment_normalizationSEXP, SEXP delimSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::DataFrame >::type dialect_data(dialect_dataSEXP);
-    Rcpp::traits::input_parameter< std::string >::type funname(funnameSEXP);
+    Rcpp::traits::input_parameter< Rcpp::StringMatrix >::type dialect_data(dialect_dataSEXP);
     Rcpp::traits::input_parameter< bool >::type alignment_normalization(alignment_normalizationSEXP);
     Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type delim(delimSEXP);
-    rcpp_result_gen = Rcpp::wrap(distance_matrix(dialect_data, funname, alignment_normalization, delim));
+    rcpp_result_gen = Rcpp::wrap(distance_matrix_internal(dialect_data, alignment_normalization, delim));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -33,25 +32,10 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// vc_leven
-Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization, Rcpp::Nullable<std::string> delim);
-RcppExport SEXP _dialectR_vc_leven(SEXP vec1SEXP, SEXP vec2SEXP, SEXP alignment_normalizationSEXP, SEXP delimSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::StringVector >::type vec1(vec1SEXP);
-    Rcpp::traits::input_parameter< Rcpp::StringVector >::type vec2(vec2SEXP);
-    Rcpp::traits::input_parameter< bool >::type alignment_normalization(alignment_normalizationSEXP);
-    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type delim(delimSEXP);
-    rcpp_result_gen = Rcpp::wrap(vc_leven(vec1, vec2, alignment_normalization, delim));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_dialectR_distance_matrix", (DL_FUNC) &_dialectR_distance_matrix, 4},
+    {"_dialectR_distance_matrix_internal", (DL_FUNC) &_dialectR_distance_matrix_internal, 3},
     {"_dialectR_leven", (DL_FUNC) &_dialectR_leven, 4},
-    {"_dialectR_vc_leven", (DL_FUNC) &_dialectR_vc_leven, 4},
     {NULL, NULL, 0}
 };
 
