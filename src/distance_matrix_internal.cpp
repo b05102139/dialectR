@@ -16,10 +16,10 @@ using namespace Rcpp;
 //' @examples
 //' data(Dutch)
 //' Dutch <- Dutch[1:3,1:3]
-//' distance_matrix(Dutch, funname = "vc_leven", alignment_normalization = TRUE)
+//' distance_matrix(Dutch, alignment_normalization = TRUE)
 // [[Rcpp::export]]
 Rcpp::NumericMatrix distance_matrix_internal(Rcpp::StringMatrix dialect_data, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim = R_NilValue){
-  int n = dialect_matrix.nrow();
+  int n = dialect_data.nrow();
   Progress p(sum(seq(1,n-1)),true);
   NumericMatrix d = no_init_matrix(n, n);
     for(int i=0; i<n;i++){
