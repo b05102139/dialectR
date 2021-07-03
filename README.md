@@ -20,21 +20,7 @@ provided in the package, and can be loaded like this:
 ``` r
 library(dialectR)
 data(Dutch)
-Dutch[1:3, 1:3]
 ```
-
-    ##                           aarde
-    ## Aalsmeer NH <U+0294><U+0252>rde
-    ## Aalst BeLb    <U+025B><U+0259>t
-    ## Aalst BeOv  e<U+025B>rd<U+0259>
-    ##                                   adem
-    ## Aalsmeer NH <U+0294><U+0252>d<U+0259>m
-    ## Aalst BeLb                 os<U+0259>m
-    ## Aalst BeOv                 os<U+0259>m
-    ##                                  appels
-    ## Aalsmeer NH        <U+0294>ap<U+0259>ls
-    ## Aalst BeLb          <U+0251>p<U+0259>ls
-    ## Aalst BeOv  <U+0251>p<U+0259>l<U+0259>n
 
 This dataset provides data of 562 concepts over 613 sites of Dutch
 speaking areas, where the concepts should be columns and the sites
@@ -101,14 +87,14 @@ dutch_polygons <- get_polygons(system.file("extdata", "DutchKML.kml", package="d
 mds_map(distDutch, dutch_points, dutch_polygons)
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-29-1.png" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 And here we present that of hierarchical clustering:
 
 ``` r
 cluster_map(distDutch, cluster_num = 6, method = "ward.D2", dutch_points, dutch_polygons)
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-30-1.png" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 In addition to such transcription-based methods, we also provide an
 acoustic-based method which is capable of computing the distance between
