@@ -108,6 +108,47 @@ acoustic_distance(i_audio, e_audio)
 
     ## [1] 9.414545
 
+The validity of this distance can be shown if we apply it to audio
+recordings of IPA vowels. Using the
+[recordings](http://www.phonetics.ucla.edu/course/chapter1/vowels.html)
+provided by Peter Ladefoged, we show how the distance between IPA vowels
+can be used to reproduce the acoustic vowel space:
+
+``` r
+# we assume all the vowels are downloaded to a single folder
+vowel_dist <- sapply(1:12, function(x){
+  sapply(1:12, function(y){
+  acoustic_distance(list.files("C:/Users/USER/Downloads/ipa_vowels", full.names = TRUE)[x],
+                    list.files("C:/Users/USER/Downloads/ipa_vowels", full.names = TRUE)[y])
+  })
+})
+```
+
+The distance matrix generated from this can be seen below:
+
+``` r
+vowel_dist[2:4,2:4]
+```
+
+             a         e         i
+    a  0.00000 10.509091 10.299737
+    e 10.50909  0.000000  9.414545
+    i 10.29974  9.414545  0.000000
+
+Now we are in a place to apply multidimensional scaling on the data:
+
+<div class="figure" style="text-align: center">
+
+<img src="C:/Users/USER/Downloads/acoustic_vowel_plot.png" alt="Acoustic vowel plot" width="600" />
+<p class="caption">
+Acoustic vowel plot
+</p>
+
+</div>
+
+As can be seen, the distance between the vowels largely correlates with
+conventional charts of the acoustic vowel space.
+
 dialectR remains in active development. If you would like to use
 dialectR in your research and have any concerns, ideas, or questions, do
 feel free to contact us.

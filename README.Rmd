@@ -54,4 +54,39 @@ e_audio <- system.file("extdata", "e.wav", package="dialectR")
 acoustic_distance(i_audio, e_audio)
 ```
 
+The validity of this distance can be shown if we apply it to audio recordings of IPA vowels. Using the [recordings](http://www.phonetics.ucla.edu/course/chapter1/vowels.html) provided by Peter Ladefoged, we show how the distance between IPA vowels can be used to reproduce the acoustic vowel space:
+```{r}
+# we assume all the vowels are downloaded to a single folder
+vowel_dist <- sapply(1:12, function(x){
+  sapply(1:12, function(y){
+  acoustic_distance(list.files("C:/Users/USER/Downloads/ipa_vowels", full.names = TRUE)[x],
+                    list.files("C:/Users/USER/Downloads/ipa_vowels", full.names = TRUE)[y])
+  })
+})
+```
+```{r, echo=FALSE}
+vowel_names <- c("ɛ", "a", "e", "i", "ɪ", "o", "ɑ", "ɔ", "ø", "u", "y", "ʏ")
+row.names(vowel_dist) <- vowel_names
+colnames(vowel_dist) <- vowel_names
+```
+The distance matrix generated from this can be seen below:
+```{r, comment=""}
+vowel_dist[2:4,2:4]
+```
+Now we are in a place to apply multidimensional scaling on the data:
+```{r, fig.width=7, fig.height=7, fig.align='center', eval=FALSE, echo=FALSE}
+vowel_mds <- cmdscale(vowel_dist, k = 3)
+plot(-vowel_mds[,2],
+     vowel_mds[,1])
+text(-vowel_mds[,2],
+     vowel_mds[,1],
+     cex=0.8,
+     labels = vowel_names,
+     pos = 4)
+```
+```{r, echo=FALSE, fig.width=7, fig.height=7, fig.align='center', fig.cap = "Acoustic vowel plot"}
+knitr::include_graphics("C:/Users/USER/Downloads/acoustic_vowel_plot.png")
+```
+As can be seen, the distance between the vowels largely correlates with conventional charts of the acoustic vowel space.
+
 dialectR remains in active development. If you would like to use dialectR in your research and have any concerns, ideas, or questions, do feel free to contact us.
