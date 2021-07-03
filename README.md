@@ -148,15 +148,7 @@ text(-vowel_mds[,2],
      pos = 4)
 ```
 
-<div class="figure" style="text-align: center">
-
-<img src="C:/Users/USER/Downloads/acoustic_vowel_plot.png" alt="Acoustic vowel plot" width="600" />
-<p class="caption">
-Acoustic vowel plot
-</p>
-
-</div>
-
+<img src="README_files/figure-gfm/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 As can be seen, the distance between the vowels largely correlates with
 conventional charts of the acoustic vowel space.
 
