@@ -74,7 +74,7 @@ The distance matrix generated from this can be seen below:
 vowel_dist[2:4,2:4]
 ```
 Now we are in a place to apply multidimensional scaling on the data:
-```{r, fig.width=7, fig.height=7, fig.align='center', eval=FALSE, echo=FALSE}
+```{r, fig.width=7, fig.height=7, fig.align='center', eval=FALSE}
 vowel_mds <- cmdscale(vowel_dist, k = 3)
 plot(-vowel_mds[,2],
      vowel_mds[,1])

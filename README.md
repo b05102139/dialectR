@@ -137,6 +137,17 @@ vowel_dist[2:4,2:4]
 
 Now we are in a place to apply multidimensional scaling on the data:
 
+``` r
+vowel_mds <- cmdscale(vowel_dist, k = 3)
+plot(-vowel_mds[,2],
+     vowel_mds[,1])
+text(-vowel_mds[,2],
+     vowel_mds[,1],
+     cex=0.8,
+     labels = vowel_names,
+     pos = 4)
+```
+
 <div class="figure" style="text-align: center">
 
 <img src="C:/Users/USER/Downloads/acoustic_vowel_plot.png" alt="Acoustic vowel plot" width="600" />
