@@ -11,9 +11,13 @@
 #' data(Dutch)
 #' Dutch <- Dutch[1:3,1:3]
 #' distance_matrix(Dutch, alignment_normalization = TRUE)
-distance_matrix <- function(dialect_data, funname, alignment_normalization = FALSE, delim = NULL){
+distance_matrix <- function(dialect_data, alignment_normalization = FALSE, delim = NULL){
   if(!is.matrix(dialect_data)){
     dialect_data <- as.matrix(dialect_data)
   }
-  distance_matrix_internal(dialect_data)
+  res <- distance_matrix_internal(dialect_data, alignment_normalization, delim)
+  original_rownames <- rownames(dialect_data)
+  rownames(res) <- original_rownames
+  colnames(res) <- original_rownames
+  res
 }
