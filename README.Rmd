@@ -6,8 +6,6 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-## dialectR: Doing Dialectometry in R
-
 dialectR is an R package for doing dialectometry, the quantitative study of dialects. The analyses offered in this package rely upon variants of edit distance to compute the aggregate distance between phonetic transcriptions of dialects, which has been shown in prior studies to correspond with perceptual data of mutual intelligibility.
 
 The developmental version of dialectR can be downloaded with devtools:

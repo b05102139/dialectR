@@ -5,5 +5,3 @@
 src/*.o
 src/*.so
 src/*.dll
-README_cache
-README_files
