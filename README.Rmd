@@ -49,3 +49,12 @@ And here we present that of hierarchical clustering:
 ```{r, fig.height=5.5, fig.width=6, fig.align='center'}
 cluster_map(distDutch, cluster_num = 6, method = "ward.D2", dutch_points, dutch_polygons)
 ```
+
+In addition to such transcription-based methods, we also provide an acoustic-based method which is capable of computing the distance between audio data:
+```{r}
+i_audio <- system.file("extdata", "i.wav", package="dialectR")
+e_audio <- system.file("extdata", "e.wav", package="dialectR")
+acoustic_distance(i_audio, e_audio)
+```
+
+dialectR remains in active development. If you would like to use dialectR in your research and have any concerns, ideas, or questions, do feel free to contact us.

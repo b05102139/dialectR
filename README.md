@@ -107,3 +107,19 @@ cluster_map(distDutch, cluster_num = 6, method = "ward.D2", dutch_points, dutch_
 ```
 
 <img src="README_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+
+In addition to such transcription-based methods, we also provide an
+acoustic-based method which is capable of computing the distance between
+audio data:
+
+``` r
+i_audio <- system.file("extdata", "i.wav", package="dialectR")
+e_audio <- system.file("extdata", "e.wav", package="dialectR")
+acoustic_distance(i_audio, e_audio)
+```
+
+    ## [1] 9.414545
+
+dialectR remains in active development. If you would like to use
+dialectR in your research and have any concerns, ideas, or questions, do
+feel free to contact us.
