@@ -1,8 +1,6 @@
 #include <progress.hpp>
 #include <progress_bar.hpp>
-#include "df2Mat.h"
 #include "leven.h"
-#include "checkVowelConsonant.h"
 
 using namespace Rcpp;
 
