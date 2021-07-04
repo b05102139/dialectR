@@ -74,12 +74,14 @@ The distance matrix generated from this can be seen below:
 vowel_dist[2:4,2:4]
 ```
 Now we are in a place to apply multidimensional scaling on the data:
-```{r, fig.width=6, fig.height=6, fig.align='center'}
+```{r, fig.width=6, fig.height=6, fig.align='center', eval=FALSE}
 vowel_mds <- cmdscale(vowel_dist, k = 3)
 plot(-vowel_mds[,2], vowel_mds[,1])
 text(-vowel_mds[,2], vowel_mds[,1], cex = 1, labels = vowel_names, pos = 2)
 ```
-
+```{r, echo=FALSE, fig.width=7, fig.height=7, fig.align='center', fig.cap = "Acoustic vowel plot"}
+knitr::include_graphics("C:/Users/USER/Downloads/acoustic_vowel_plot.png")
+```
 As can be seen, the distance between the vowels largely correlates with conventional charts of the acoustic vowel space.
 
 dialectR remains in active development. If you would like to use dialectR in your research and have any concerns, ideas, or questions, do feel free to contact us.
