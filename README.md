@@ -139,10 +139,11 @@ Now we are in a place to apply multidimensional scaling on the data:
 
 ``` r
 vowel_mds <- cmdscale(vowel_dist, k = 3)
-plot(-vowel_mds[,2], vowel_mds[,1])
+plot(-vowel_mds[,2], vowel_mds[,1], xlab = "", ylab = "")
 text(-vowel_mds[,2], vowel_mds[,1], cex = 0.8, labels = vowel_names, pos = 4)
 ```
 
+<img src="README_files/figure-gfm/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 <img src="./README_files/figure-gfm/acoustic_vowel_plot.png" width="600" style="display: block; margin: auto;" />
 As can be seen, the distance between the vowels largely correlates with
 conventional charts of the acoustic vowel space.
