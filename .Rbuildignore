@@ -9,3 +9,5 @@
 ^dll$
 ^README.Rmd$
 ^md$
+^README_cache$
+^README_files$
