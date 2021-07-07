@@ -37,13 +37,13 @@ distDutch[1:3,1:3]
 ```
 
 This can then be projected onto geography. We provide two such analyses in the package: one which depends on multidimensional scaling by mapping three dimensions onto RGB values and mixing them evenly, and one which utilizes the results of hierarchical clustering. The following two plots show that the dialect groupings of these two analyses largely converge. First we present the results of multidimensional scaling:  
-```{r, fig.height=5.5, fig.width=6, fig.align='center'}
+```{r dutch_mds, fig.height=5.5, fig.width=6, fig.align='center'}
 dutch_points <- get_points(system.file("extdata", "DutchKML.kml", package="dialectR"))
 dutch_polygons <- get_polygons(system.file("extdata", "DutchKML.kml", package="dialectR"))
 mds_map(distDutch, dutch_points, dutch_polygons)
 ```
 And here we present that of hierarchical clustering:
-```{r, fig.height=5.5, fig.width=6, fig.align='center'}
+```{r dutch_cluster, fig.height=5.5, fig.width=6, fig.align='center'}
 cluster_map(distDutch, cluster_num = 6, method = "ward.D2", kml_points = dutch_points, kml_polygon = dutch_polygons)
 ```
 
