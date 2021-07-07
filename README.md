@@ -70,9 +70,9 @@ distDutch[1:3,1:3]
 ```
 
     ##             Aalsmeer NH Aalst BeLb Aalst BeOv
-    ## Aalsmeer NH   0.0000000  0.3232552  0.3988298
-    ## Aalst BeLb    0.3232552  0.0000000  0.3442587
-    ## Aalst BeOv    0.3988298  0.3442587  0.0000000
+    ## Aalsmeer NH   0.0000000  0.3609137  0.4224437
+    ## Aalst BeLb    0.3609137  0.0000000  0.3745071
+    ## Aalst BeOv    0.4224437  0.3745071  0.0000000
 
 This can then be projected onto geography. We provide two such analyses
 in the package: one which depends on multidimensional scaling by mapping
