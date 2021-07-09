@@ -91,13 +91,13 @@ Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool
             tmpLenStr1 -= 1;
           }
         }
-        if (any(is_na(as<StringVector>(vec1[i])))||any(is_na(as<StringVector>(vec2[i])))){
+        if (any(is_na(as<StringVector>(vec1[i])))|any(is_na(as<StringVector>(vec2[i])))){
           res(i)=NA_REAL;
         } else{
           res(i)=d(lenStr1,lenStr2) / (max(NumericVector::create(inCounter, delCounter))+std::min(lenStr1, lenStr2));
         }
       } else if (!alignment_normalization){
-        if (any(is_na(as<StringVector>(vec1[i])))||any(is_na(as<StringVector>(vec2[i])))){
+        if (any(is_na(as<StringVector>(vec1[i])))|any(is_na(as<StringVector>(vec2[i])))){
           res(i)=NA_REAL;
         } else{
           res(i)=d(lenStr1,lenStr2);
@@ -191,7 +191,7 @@ Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool
         bilbaoNumerator+=min(bilbaoMatrix(_,j));
       }
       
-      if (any(is_na(as<StringVector>(vec1[k])))||any(is_na(as<StringVector>(vec2[k])))){
+      if (any(is_na(as<StringVector>(vec1[k])))|any(is_na(as<StringVector>(vec2[k])))){
         res(k)=NA_REAL;
       } else{
         res(k)=bilbaoNumerator/(arr1Size+arr2Size);
