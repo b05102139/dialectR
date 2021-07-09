@@ -16,9 +16,9 @@
 #' dutch_points <- get_points(system.file("extdata", "DutchKML.kml", package="dialectR"))
 #' dutch_polygons <- get_polygons(system.file("extdata", "DutchKML.kml", package="dialectR"))
 #' cluster_map(distDutch[1:100,1:100], dutch_points, dutch_polygons, 5, "ward.D2")
-cluster_map <- function(dist_mat, kml_points, kml_polygon, cluster_num, method){
-
-  cluster_groups <- get_clusters(dist_mat, cluster_num, method)
+cluster_map <- function(dist_mat, kml_points, kml_polygon, cluster_num, method, validation_method = c("none", "bootstrap", "noise"), resampling_runs = NULL){
+  validation_method <- match.arg(validation_method)
+  cluster_groups <- get_clusters(dist_mat, cluster_num, method, validation_method, resampling_runs)
 
   full_df <- merge(cluster_groups,
                 kml_points,
