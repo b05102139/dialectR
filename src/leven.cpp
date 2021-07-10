@@ -94,8 +94,7 @@ Rcpp::NumericVector leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool
         if (any(is_na(as<StringVector>(vec1[i])))|any(is_na(as<StringVector>(vec2[i])))){
           res(i)=NA_REAL;
         } else{
-          //res(i)=d(lenStr1,lenStr2) / (max(NumericVector::create(inCounter, delCounter))+std::min(lenStr1, lenStr2));
-          res(i)=d(lenStr1,lenStr2) / std::max(lenStr1, lenStr2);
+          res(i)=d(lenStr1,lenStr2) / (max(NumericVector::create(inCounter, delCounter))+std::min(lenStr1, lenStr2));
         }
       } else if (!alignment_normalization){
         if (any(is_na(as<StringVector>(vec1[i])))|any(is_na(as<StringVector>(vec2[i])))){
