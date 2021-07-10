@@ -2,15 +2,24 @@
 #include "split.h"
 #include "checkVowelConsonant.h"
 #include "tinyutf8.h"
-#include <string>
 
 using namespace Rcpp;
 
-// [[Rcpp::plugins("cpp11")]]
+//' VC-sensitive edit distance for Dialectometry
+//'
+//' An edit distance that is sensitive to vowel and consonant alignment. If the aligned segments are a vowel-consonant pair, the difference is penalized as a score of 2; if not, 1.  Allows for normalization by dividing alignment length, and for accommodating multiple responses with Bilbao distance, as proposed by Aurrekoetxea et al (2020).
+//'
+//' @param vec1 A vector of words.
+//' @param vec2 A vector of words to be compared against.
+//' @param alignment_normalization A logical value, indicating whether or not the difference scores are to be normalized by alignment length.
+//' @param delim An optional delimiter, in situations where multiple responses exist in the data.
+//' @return A number indicating the number of operations to transform a string to the other, which optionally may undergo length normalization.
+//' @references
+//' Aurrekoetxea, G., Nerbonne, J., and Rubio, J. 2020. Unifying Analyses of Multiple Responses. \emph{Dialectologia}, 25:59–86.
+//' @examples
+//' vc_leven("hit", "hot/hit", alignment_normalization = TRUE, delim = "/")
 // [[Rcpp::export]]
 Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, bool alignment_normalization = false, Rcpp::Nullable<std::string> delim = R_NilValue){
-  if (all(is_na(vec1))) return R_NilValue;
-  if (all(is_na(vec2))) return R_NilValue;
   int vec1Size=vec1.size();
   int vec2Size=vec2.size();
   if(vec1Size!=vec2Size) Rcpp::stop("The two vector inputs are not of same length.");
@@ -18,14 +27,11 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
   tiny_utf8::string str2;
   int lenStr1;
   int lenStr2;
-  double cost;
-  //double inCost;
-  //double delCost;
+  int cost;
   NumericVector tmp(3);
   Rcpp::NumericVector res(vec1Size);
   int inCounter;
   int delCounter;
-  //NumericMatrix forbid;
   NumericMatrix d;
   if(delim.isNull()){
     for(int i=0;i<vec1Size;i++){
@@ -36,101 +42,31 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
       lenStr1=str1.length();
       lenStr2=str2.length();
       NumericMatrix d(lenStr1+1,lenStr2+1);
-      NumericMatrix forbid(lenStr1+1,lenStr2+1);
       for(int i=0;i<lenStr1+1;i++)d(i,0)=i;
       for(int j=0;j<lenStr2+1;j++)d(0,j)=j;
       cost=0;
-      //if (segment_weights.isNull()){
-        for(int i=1;i<lenStr1+1;i++){
-          for(int j=1;j<lenStr2+1;j++){
-            if(str1[i-1]==str2[j-1]){
-              cost=0;
-            }
-            else if (checkVowelConsonant(str1[i-1], str2[j-1])){
-              cost=1;
-            } else{
-              cost=2;
-            }
-            tmp[0]=d(i-1,j)+1;
-            tmp[1]=d(i,j-1)+1;
-            tmp[2]=d(i-1,j-1)+cost;
-            /*
-            if(!checkVowelConsonant(str1[i-1], str2[j-1])){
-              forbid(i,j)=1;
-            }
-            */
-            d(i,j)=min(tmp);
-          }
-        }
-        //}
-        /*
-      else if (!segment_weights.isNull()){
-        NumericMatrix segment_weights2 = NumericMatrix(segment_weights);
-        StringVector segment_weight_rownames = rownames(segment_weights2);
-        for(int i=1;i<lenStr1+1;i++){
-          for(int j=1;j<lenStr2+1;j++){
-            int str1_index;
-            int str2_index;
-            int indel_index;
-            NumericVector typeChange;
-            typeChange.push_back(str1[i-1]);
-            typeChange.push_back(str2[j-1]);
-            for (int k=0; k<segment_weight_rownames.length(); k++){
-              //int myA = std::stoi(as<std::string>(segment_weight_rownames[k]));
-              if (typeChange(0)==std::stoi(as<std::string>(segment_weight_rownames[k]))) str1_index = k;
-            }
-            for (int k=0; k<segment_weight_rownames.length(); k++){
-              //std::string my2 = as<std::string>(segment_weight_rownames[k]);
-              //int myB = std::stoi(as<std::string>(segment_weight_rownames[k]));
-              if (typeChange(1)==std::stoi(as<std::string>(segment_weight_rownames[k]))) str2_index = k;
-            }
-            // find 45
-            for (int k=0; k<segment_weight_rownames.length(); k++){
-              if (45==std::stoi(as<std::string>(segment_weight_rownames[k]))) indel_index = k;
-            }
-            cost = segment_weights2(str1_index, str2_index);
-            inCost = segment_weights2(indel_index, str2_index);
-            delCost = segment_weights2(str1_index, indel_index);
-            //Rcout << cost << " " << inCost << " " << delCost << std::endl;
-            //tmp[0]=d(i-1,j)+1;
-            //tmp[1]=d(i,j-1)+1;
-            tmp[0]=d(i-1,j)+inCost;
-            tmp[1]=d(i,j-1)+delCost;
-            tmp[2]=d(i-1,j-1)+cost;
-            if(!checkVowelConsonant(str1[i-1], str2[j-1])){
-              forbid(i,j)=1;
-            }
-            d(i,j)=min(tmp);
-          }
+      for(int i=1;i<lenStr1+1;i++){
+        for(int j=1;j<lenStr2+1;j++){
+          if(str1[i-1]==str2[j-1]) cost=0;
+          else if(checkVowelConsonant(str1[i-1], str2[j-1])) cost=1;
+          else cost=2;
+          tmp(0)=d(i-1,j)+1;
+          tmp(1)=d(i,j-1)+1;
+          tmp(2)=d(i-1,j-1)+cost;
+          d(i,j)=min(tmp);
         }
       }
-       */
-      //Rcout << d << std::endl;
-      //forbid(lenStr1,lenStr2)=0;
-      //for (int m=1; m<lenStr1+1; m++){
-      //  for (int n=1; n<lenStr2+1; n++){
-      //    if (forbid(m,n)==1) d(m,n) = std::numeric_limits<int>::max();
-      //  }
-      //}
-      //forbid(lenStr1+1,lenStr2+1) = std::numeric_limits<int>::max();
       if (alignment_normalization){
         int tmpLenStr1=lenStr1;
         int tmpLenStr2=lenStr2;
-        while ((tmpLenStr1>0)||(tmpLenStr2>0)){
+        while ((tmpLenStr1>0)|(tmpLenStr2>0)){
           int diaCell;
           int leftCell;
           int upCell;
-          if (tmpLenStr1-1>=0&tmpLenStr2-1>=0){
-          /*
-            if (forbid(lenStr1,lenStr2)==1){
-              d(tmpLenStr1-1,tmpLenStr2-1) = std::numeric_limits<int>::max()-1;
-            }
-          */ 
+          if ((tmpLenStr1-1>=0)&(tmpLenStr2-1>=0)){
             diaCell = d(tmpLenStr1-1,tmpLenStr2-1);
-          } else if(tmpLenStr1-1<0|tmpLenStr2-1<0){
+          } else if((tmpLenStr1-1<0)|(tmpLenStr2-1<0)){
             diaCell=std::numeric_limits<int>::max();
-          } else{
-            diaCell = d(tmpLenStr1-1,tmpLenStr2-1);
           }
           if (tmpLenStr2-1>=0){
             leftCell = d(tmpLenStr1,tmpLenStr2-1);
@@ -197,97 +133,37 @@ Rcpp::NumericVector vc_leven(Rcpp::StringVector vec1, Rcpp::StringVector vec2, b
           for(int i=0;i<lenStr1+1;i++)d(i,0)=i;
           for(int j=0;j<lenStr2+1;j++)d(0,j)=j;
           cost=0;
-          //if (segment_weights.isNull()){
-            for(int i=1;i<lenStr1+1;i++){
-              for(int j=1;j<lenStr2+1;j++){
-                if(str1[i-1]==str2[j-1]){
-                  cost=0;
-                }
-                else if (checkVowelConsonant(str1[i-1],str2[j-1])){
-                  cost=1;
-                } else{
-                  cost=2;
-                }
-                tmp[0]=d(i-1,j)+1;
-                tmp[1]=d(i,j-1)+1;
-                tmp[2]=d(i-1,j-1)+cost;
-                /*
-                if(!checkVowelConsonant(str1[i-1], str2[j-1])){
-                  forbid(i,j)=1;
-                }
-                */
-                d(i,j)=min(tmp);
-              }
-            }
-          //} 
-          /*
-          else if (!segment_weights.isNull()){
-            NumericMatrix segment_weights2 = NumericMatrix(segment_weights);
-            StringVector segment_weight_rownames = rownames(segment_weights2);
-            for(int i=1;i<lenStr1+1;i++){
-              for(int j=1;j<lenStr2+1;j++){
-                int str1_index;
-                int str2_index;
-                NumericVector typeChange;
-                typeChange.push_back(str1[i-1]);
-                typeChange.push_back(str2[j-1]);
-                for (int k=0; k<segment_weight_rownames.length(); k++){
-                  std::string my1 = as<std::string>(segment_weight_rownames[k]);
-                  int myA = std::stoi(my1);
-                  if (typeChange(0)==myA){
-                    //Rcout << myA << std::endl;
-                    //Rcout << typeChange(0) << std::endl;
-                  }
-                  if (typeChange(0)==myA) str1_index = k;
-                }
-                for (int k=0; k<segment_weight_rownames.length(); k++){
-                  std::string my2 = as<std::string>(segment_weight_rownames[k]);
-                  int myB = std::stoi(my2);
-                  if (typeChange(1)==myB){
-                    //Rcout << myB << std::endl;
-                    //Rcout << typeChange(1) << std::endl;
-                  }
-                  if (typeChange(1)==myB) str2_index = k;
-                }
-                cost = segment_weights2(str1_index, str2_index);
-                tmp[0]=d(i-1,j)+1;
-                tmp[1]=d(i,j-1)+1;
-                tmp[2]=d(i-1,j-1)+cost;
-                if(!checkVowelConsonant(str1[i-1], str2[j-1])){
-                  forbid(i,j)=1;
-                }
-                d(i,j)=min(tmp);
-              }
+          for(int i=1;i<lenStr1+1;i++){
+            for(int j=1;j<lenStr2+1;j++){
+              if(str1[i-1]==str2[j-1]) cost=0;
+              else if(checkVowelConsonant(str1[i-1],str2[j-1])) cost=1;
+              else cost=2;
+              tmp(0)=d(i-1,j)+1;
+              tmp(1)=d(i,j-1)+1;
+              tmp(2)=d(i-1,j-1)+cost;
+              d(i,j)=min(tmp);
             }
           }
-           */
           if (alignment_normalization){
             int tmpLenStr1=lenStr1;
             int tmpLenStr2=lenStr2;
-            while (lenStr1 > 0 || lenStr2 > 0){
-              int diaCell=0;
-              int leftCell=0;
-              int upCell=0;
-              if (lenStr1-1>=0&lenStr2-1>=0){
-                /*
-                if (forbid(lenStr1,lenStr2)==1){
-                  d(lenStr1-1,lenStr2-1) = std::numeric_limits<int>::max()-1;
-                }
-                */
-                diaCell = d(lenStr1-1,lenStr2-1);
-              } else if(lenStr1-1<0|lenStr2-1<0){
+            while ((tmpLenStr1>0)|(tmpLenStr2>0)){
+              int diaCell;
+              int leftCell;
+              int upCell;
+              if ((tmpLenStr1-1>=0)&(tmpLenStr2-1>=0)){
+                diaCell = d(tmpLenStr1-1,tmpLenStr2-1);
+              } else if((tmpLenStr1-1<0)|(tmpLenStr2-1<0)){
                 diaCell=std::numeric_limits<int>::max();
-              } else{
-                diaCell = d(lenStr1-1,lenStr2-1);
               }
-              if (lenStr2-1>=0){
-                leftCell = d(lenStr1,lenStr2-1);
-              } else if (lenStr2-1<0){
+              if (tmpLenStr2-1>=0){
+                leftCell = d(tmpLenStr1,tmpLenStr2-1);
+              } else if (tmpLenStr2-1<0){
                 leftCell=std::numeric_limits<int>::max();
               }
-              if (lenStr1-1>=0){
-                upCell = d(lenStr1-1,lenStr2);
-              } else if (lenStr1-1<0){
+              if (tmpLenStr1-1>=0){
+                upCell = d(tmpLenStr1-1,tmpLenStr2);
+              } else if (tmpLenStr1-1<0){
                 upCell=std::numeric_limits<int>::max();
               }
               IntegerVector directionVec = IntegerVector::create(diaCell, leftCell, upCell);
