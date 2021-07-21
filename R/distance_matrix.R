@@ -10,7 +10,7 @@
 #' @examples
 #' data(Dutch)
 #' Dutch <- Dutch[1:3,1:3]
-#' distance_matrix(Dutch, alignment_normalization = TRUE)
+#' distance_matrix(Dutch, "leven", alignment_normalization = TRUE)
 distance_matrix <- function(dialect_data, funname, alignment_normalization = FALSE, delim = NULL){
   if(!is.matrix(dialect_data)){
     dialect_data <- as.matrix(dialect_data)
