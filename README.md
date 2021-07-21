@@ -65,7 +65,7 @@ are aggregated. Assuming the same function arguments as the above, we
 can also perform an aggregate calculation of site and site distance:
 
 ``` r
-distDutch <- dialectR::distance_matrix(Dutch, alignment_normalization = TRUE)
+distDutch <- dialectR::distance_matrix(Dutch, "leven", alignment_normalization = TRUE)
 distDutch[1:3,1:3]
 ```
 
